@@ -26,9 +26,7 @@ namespace ariel
         Node *root;
         enum Order
         {
-            preorder,
-            inorder,
-            postorder
+            preorder,inorder,postorder
         };
         class Iterator
         {
