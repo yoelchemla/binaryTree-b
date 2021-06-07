@@ -11,9 +11,7 @@ namespace ariel
         {
             friend class BinaryTree;
             T data;
-            Node *parent;
-            Node *right;
-            Node *left;
+            Node *parent,*right, *left;
         public:
             T get_data(){//getter
                 return data;
@@ -32,22 +30,23 @@ namespace ariel
         {
             Node *curr_ptr;
             Order order1;
-            std::stack<Node*> stk;
+            std::stack<Node*> stk;//a new stack
 
         public:  
             Iterator() : curr_ptr(nullptr){};
             Iterator(const Order order1, Node *node=nullptr) : curr_ptr(node) ,order1(order1){
                init_Stack(node);
-                if (!stk.empty()){
+                if (!stk.empty()){ //stack isn't empty
                     curr_ptr = stk.top();
-                    stk.pop();
+                    stk.pop(); 
                 }
             }
             Node *get_curr(){
-                return curr_ptr;
+                return curr_ptr; //the pointer
             }
             void init_Stack(Node *node){
                 if (node == nullptr){return;} //break
+               
                 if (order1 == preorder){
                     init_Stack(node->right);
                     init_Stack(node->left);
@@ -67,7 +66,7 @@ namespace ariel
             //prefix
             Iterator operator++(int){
                 Iterator temp = *this;
-                if (!stk.empty()){
+                if (!stk.empty()){ //stack isn't empty
                  curr_ptr = stk.top();
                  stk.pop();
                 }
@@ -135,7 +134,7 @@ namespace ariel
         }
         BinaryTree<T> &operator=(BinaryTree<T> &&btree){
             if (root){
-            delete root;
+            delete root; //delete the src
             }
             root = btree.root;
             btree.root = nullptr;
